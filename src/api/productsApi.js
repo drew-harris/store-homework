@@ -13,3 +13,19 @@ export async function getProductById(id) {
 
   return response.data;
 }
+
+export async function getProducts() {
+  const response = await axios.get(`${API_URL}/`, {
+    headers: HEADERS,
+  });
+
+  return response.data;
+}
+
+export async function addReview(productId, review) {
+  const response = await axios.post(`${API_URL}/${productId}/reviews`, review, {
+    headers: HEADERS,
+  });
+
+  return response.data;
+}
