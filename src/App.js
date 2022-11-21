@@ -1,4 +1,4 @@
-import ProductDetails from "./components/producs/ProductDetails";
+import ProductDetails from "./components/products/ProductDetails";
 
 function App() {
   return (
