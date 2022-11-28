@@ -1,15 +1,16 @@
 import React, { useState } from "react";
+import { addReview } from "../../api/productsApi";
 import Rating from "../common/Rating";
 import { SelectField } from "../common/SelectField";
 import { TextAreaField } from "../common/TextAreaField";
 import TextField from "../common/TextField";
 
-function ReviewForm({ onNewReview }) {
+function ReviewForm({ onNewReview, productId }) {
   const [rating, setRating] = useState(null);
   const [comment, setComment] = useState("");
   const [name, setName] = useState("");
 
-  const submit = () => {
+  const submit = async () => {
     onNewReview({
       rating,
       comment,

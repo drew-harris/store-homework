@@ -39,11 +39,19 @@ const ProductCard = ({ product }) => {
     <div className="card">
       <div className="product-picture">
         <img className="card-img-top" src={product.imageUrl} alt=""></img>
+        <div className="product-price fs-6 badge bg-secondary bg-success">
+          {product.price}
+        </div>
       </div>
       <div className="card-body text-center fw-bold">
         <div className="card-title">{product.name}</div>
-        <div className="d-grid gap-2">
-          <button className="btn btn-primary">Product Details</button>
+        <div className="d-flex flex-column gap-2">
+          <button
+            className="btn btn-primary"
+            onClick={() => navigate("products/" + product.id)}
+          >
+            Product Details
+          </button>
           <button className="btn btn-warning" onClick={() => addItemToCart()}>
             Add To Cart
           </button>

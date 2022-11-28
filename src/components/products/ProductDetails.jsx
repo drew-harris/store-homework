@@ -1,12 +1,15 @@
-import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { getProductById } from "../../api/productsApi";
+import { useContext, useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { addReview, getProductById } from "../../api/productsApi";
+import { CartContext } from "../../context/CartContext";
+import "./productdetails.css";
 import ReviewForm from "./ReviewForm";
 import ReviewList from "./ReviewList";
 
 export function ProductDetails() {
   const [product, setProduct] = useState(null);
   const { id } = useParams();
+  const { addToCart } = useContext(CartContext);
 
   useEffect(() => {
     setProduct(null);
@@ -16,21 +19,21 @@ export function ProductDetails() {
     };
 
     fetchData();
-  }, []);
+  }, [id]);
 
-  const onNewReview = (submission) => {
+  const onNewReview = async (submission) => {
+    const newReview = {
+      userName: submission.name,
+      rating: submission.rating,
+      comment: submission.comment,
+      date: new Date(),
+    };
     setProduct({
       ...product,
-      reviews: [
-        ...product.reviews,
-        {
-          userName: submission.name,
-          rating: submission.rating,
-          comment: submission.comment,
-          date: new Date(),
-        },
-      ],
+      reviews: [...product.reviews, newReview],
     });
+
+    addReview(product.id, newReview);
   };
 
   if (!product) {
@@ -52,10 +55,14 @@ export function ProductDetails() {
         </ol>
       </nav>
 
-      <div className="container-flow py-4 jumbotron row bg-light mt-3">
+      <div className="container-flow py-4 position-relative jumbotron row bg-light mt-3">
         <div className="row">
           <div className="col-4">
-            <img src={product?.imageUrl} className="col-12 float-left"></img>
+            <img
+              alt=""
+              src={product?.imageUrl}
+              className="col-12 float-left"
+            ></img>
           </div>
           <div className="col-6 p-5">
             <div className="fs-1 fw-lighter">{product.name}</div>
@@ -63,6 +70,15 @@ export function ProductDetails() {
             <div className="fw-lighter mt-4">{product.description}</div>
           </div>
         </div>
+        <Link
+          className="add-to-cart"
+          to="/cart"
+          onClick={() => {
+            addToCart(product);
+          }}
+        >
+          <button className="btn btn-warning">Add To Cart</button>
+        </Link>
       </div>
       <ReviewList reviews={product.reviews} />
       <ReviewForm onNewReview={onNewReview} />
