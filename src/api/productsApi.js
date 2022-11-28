@@ -15,11 +15,17 @@ export async function getProductById(id) {
 }
 
 export async function getProducts() {
-  const response = await axios.get(`${API_URL}/`, {
-    headers: HEADERS,
-  });
+  try {
+    const response = await axios.get(`${API_URL}/`, {
+      headers: HEADERS,
+    });
 
-  return response.data;
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error.message || new Error("Could not get product list");
+  }
 }
 
 export async function addReview(productId, review) {

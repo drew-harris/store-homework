@@ -1,0 +1,19 @@
+.store-title {
+  background-color: rgb(53, 58, 63);
+  color: white;
+  font-size: 1.3rem;
+  padding: 1rem;
+}
+
+.store-subtitle {
+  background-color: rgb(233, 233, 233);
+  color: #222222;
+  padding: 1rem;
+}
+
+.product-grid {
+  display: grid;
+  gap: 2rem;
+  padding-top: 1rem;
+  grid-template-columns: 1fr 1fr 1fr;
+}

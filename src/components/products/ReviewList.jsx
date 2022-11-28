@@ -23,6 +23,7 @@ function BeTheFirst() {
 }
 
 function SingleReview({ review }) {
+  const date = new Date(review.date);
   return (
     <div className="border mb-3">
       {/* this style is technically part of bootstrap docs and theres no other way to get the color  */}
@@ -36,7 +37,7 @@ function SingleReview({ review }) {
         <div className="d-flex bg-light fs-6 text-muted flex-row alight-items-center justify-content-between">
           <div>{review.userName}</div>
           <div>
-            {review.date.toLocaleDateString(review.date.getTimezoneOffset(), {
+            {date.toLocaleDateString(date.getTimezoneOffset(), {
               year: "numeric",
               month: "short",
               day: "numeric",

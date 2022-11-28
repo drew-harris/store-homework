@@ -1,15 +1,17 @@
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { getProductById } from "../../api/productsApi";
 import ReviewForm from "./ReviewForm";
 import ReviewList from "./ReviewList";
 
-function ProductDetails() {
+export function ProductDetails() {
   const [product, setProduct] = useState(null);
+  const { id } = useParams();
 
   useEffect(() => {
     setProduct(null);
     const fetchData = async () => {
-      const product = await getProductById(1);
+      const product = await getProductById(id);
       setProduct(product);
     };
 

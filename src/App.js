@@ -1,11 +1,16 @@
-import { BrowserRouter, Route, RouterProvider } from "react-router-dom";
-import ProductDetails from "./components/products/ProductDetails";
+import { RouterProvider } from "react-router-dom";
+import { CartContextProvider } from "./context/CartContext";
 import { router } from "./Routes";
 
 function App() {
   return (
     <>
-      <RouterProvider router={router} />
+      <CartContextProvider>
+        <div className="page">
+          <div className="store-title">Store</div>
+          <RouterProvider router={router} />
+        </div>
+      </CartContextProvider>
     </>
   );
 }

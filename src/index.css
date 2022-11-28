@@ -1,0 +1,10 @@
+.store-title {
+  background-color: rgb(53, 58, 63);
+  color: white;
+  font-size: 1.3rem;
+  padding: 1rem;
+}
+
+.page {
+  padding-inline: 8rem;
+}
